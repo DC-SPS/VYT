@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="45-minútové praktické cvičenie: digitálne vstupy a výstupy na Arduino Uno.">
+  <title>01 — Vstup dá pokyn | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="index.html"><span class="wordmark-icon">D·I/O</span><span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span></a><a class="header-link" href="index.html">← Prehľad cvičení</a></header>
+  <main>
+    <section class="lesson-hero shell">
+      <div><p class="eyebrow"><span class="live-dot"></span> CVIČENIE 01 · 45 MIN · ARDUINO UNO</p><h1>Vstup dá pokyn.<br><span>Výstup ho vykoná.</span></h1><p class="hero-lead">Nastav piny, prečítaj tlačidlo a ovládaj LED. Na konci vysvetlíš cestu signálu od tlačidla po výstup.</p><div class="hero-actions"><a class="button button-primary" href="#priebeh">Prejsť na priebeh <span aria-hidden="true">↓</span></a><button class="button button-quiet print-button" type="button" data-print>Vytlačiť prípravu</button></div></div>
+      <aside class="outcome-card"><span class="outcome-icon">01</span><p class="eyebrow">CIEĽ HODINY</p><h2>Zapojím a vysvetlím.</h2><p>Správne nakonfigurujem digitálny vstup a výstup, prečítam stav tlačidla a podľa neho ovládam LED.</p><div class="success-line"><span class="live-dot"></span> VIDITEĽNÝ VÝSLEDOK: LED REAGUJE NA TLAČIDLO</div></aside>
+    </section>
+
+    <section class="shell lesson-section" id="priebeh">
+      <div class="section-heading"><div><p class="eyebrow">ČASOVÝ PLÁN</p><h2>45 minút v dielni</h2></div><span class="duration duration-large">POMÔCKY: UNO · LED · 220–330 Ω · TLAČIDLO · PREPOJKY</span></div>
+      <div class="timeline">
+        <article class="timeline-row"><span class="time">00–05<small>5 min</small></span><div><span class="phase">NALADENIE</span><h3>Čo je vstup a čo výstup?</h3><p>Žiaci ukážu na tlačidlo (vstup), LED (výstup) a nahlas predpovedia, čo sa stane po stlačení.</p></div><span class="teacher-cue">PREDPOVEĎ → POZOROVANIE</span></article>
+        <article class="timeline-row"><span class="time">05–12<small>7 min</small></span><div><span class="phase">RÝCHLE OPAKOVANIE</span><h3>HIGH, LOW a nastavenie pinu</h3><p>Prejdite štyri body teórie nižšie. Zdôraznite, že <code>pinMode()</code> patrí do <code>setup()</code>; stav čítame alebo zapisujeme v <code>loop()</code>.</p></div><span class="teacher-cue">VYSVETLI → UKÁŽ</span></article>
+        <article class="timeline-row"><span class="time">12–20<small>8 min</small></span><div><span class="phase">UKÁŽKA UČITEĽA</span><h3>Prvý signál od tlačidla k LED</h3><p>Ukážte zapojenie a kostru programu. Žiaci ukážu, kde program určuje smer pinu a kde rozhoduje o rozsvietení.</p></div><span class="teacher-cue">UKÁŽ → POMENUJ</span></article>
+        <article class="timeline-row"><span class="time">20–37<small>17 min</small></span><div><span class="phase">SAMOSTATNÁ PRÁCA</span><h3>Postav školskú signalizáciu</h3><p>Každý tím dokončí základný obvod a aspoň jednu projektovú kartu. Po úspechu si vyberie ďalšiu kartu alebo upraví program.</p></div><span class="teacher-cue">ZAPOJ → OTESTUJ</span></article>
+        <article class="timeline-row"><span class="time">37–43<small>6 min</small></span><div><span class="phase">OVERENIE</span><h3>Ukáž riešenie, vysvetli cestu</h3><p>Dvojice si vymenia úlohy: jeden vysvetľuje pin INPUT, druhý OUTPUT a priradí správnu funkciu ku čítaniu a zápisu.</p></div><span class="teacher-cue">PREDVEĎ → VYSVETLI</span></article>
+        <article class="timeline-row"><span class="time">43–45<small>2 min</small></span><div><span class="phase">EXIT TICKET</span><h3>Jedna veta na odchod</h3><p>„Tlačidlo pripájam na …, pretože …; LED ovládam funkciou …“</p></div><span class="teacher-cue">ZHRŇ</span></article>
+      </div>
+    </section>
+
+    <section class="theory-band">
+      <div class="shell theory-layout">
+        <div class="theory-intro"><p class="eyebrow">TEORETICKÝ ZÁKLAD</p><h2>Najprv<br>smer signálu.</h2><p>Digitálny signál má dve logické úrovne: LOW (0) a HIGH (1). Mikrokontrolér číta vstupy a nastavuje výstupy.</p></div>
+        <div class="theory-list">
+          <article class="theory-item"><span class="theory-index">A</span><div><h3>INPUT — mikrokontrolér počúva</h3><p>Tlačidlo pripojíme na digitálny pin. <code>pinMode(BUTTON_PIN, INPUT);</code> a potom <code>digitalRead(BUTTON_PIN)</code>.</p></div></article>
+          <article class="theory-item"><span class="theory-index">B</span><div><h3>OUTPUT — mikrokontrolér riadi</h3><p>LED pripojíme cez prúdový rezistor. <code>pinMode(LED_PIN, OUTPUT);</code> a <code>digitalWrite(LED_PIN, HIGH/LOW)</code>.</p></div></article>
+          <article class="theory-item"><span class="theory-index">C</span><div><h3>Najprv konfigurácia, potom práca</h3><p>Každý použitý pin nastav pomocou <code>pinMode()</code> vo funkcii <code>setup()</code>. Vstup čítaj a výstup riadi v <code>loop()</code>.</p></div></article>
+          <article class="theory-item"><span class="theory-index">D</span><div><h3>LED vždy s rezistorom</h3><p>Zapojenie: D8 → rezistor 220–330 Ω → anóda LED; katóda LED → GND. Rezistor obmedzuje prúd.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">VZOROVÉ ZAPOJENIE</p><h2>Tlačidlo rozhoduje, LED odpovedá</h2></div><p class="section-note">Základný variant v tomto cvičení používa externý pull-down 10 kΩ, aby bol vstup v oboch polohách definovaný.</p></div>
+      <div class="wiring-grid">
+        <article class="panel"><span class="phase">ZAPOJENIE · PULL-DOWN</span><h3>Tlačidlo na D2</h3><div class="wiring-lines"><p><span>D2</span> ↔ tlačidlo ↔ +5 V</p><p><span>D2</span> ↔ rezistor 10 kΩ ↔ GND</p><p><span>D8</span> → 220–330 Ω → anóda LED</p><p><span>katóda LED</span> → GND</p></div><p class="fine-print">GND musí byť spoločný. Pred prepojením vodičov a zmenou zapojenia odpoj USB. LED má dlhšiu nožičku (anódu) smerom k rezistoru a D8.</p></article>
+        <article class="panel code-panel"><div class="code-heading"><span>ARDUINO IDE · ZÁKLADNÝ PROGRAM</span><button class="copy-button" type="button" data-copy="code-one">Kopírovať</button></div><pre><code id="code-one">const int LED_PIN = 8;
+const int BUTTON_PIN = 2;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT);
+}
+
+void loop() {
+  int buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == HIGH) {
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+}</code></pre><p class="fine-print">Pri tomto pull-down zapojení je uvoľnené tlačidlo LOW a stlačené HIGH.</p></article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">PROJEKTOVÉ KARTY · SPOLOČNÁ TÉMA</p><h2>Školská svetelná signalizácia</h2></div><p class="section-note">Základ: Arduino Uno, LED diódy s rezistormi a tlačidlá. Začni kartou 1; ďalšie sú rozšírenia.</p></div>
+      <div class="project-grid">
+        <article class="project-card"><span class="project-number">KARTA 01 / ZÁKLAD</span><h3>Tichý signál</h3><p>Po stlačení tlačidla sa rozsvieti jedna LED. Po uvoľnení zhasne.</p><div class="task-line"><strong>Úloha</strong><span>Použi INPUT, OUTPUT, digitalRead() a podmienku if/else.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>LED reaguje iba počas stlačenia.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 02 / ROZŠÍRENIE</span><h3>Potvrdenie odpovede</h3><p>Krátke stlačenie rozsvieti LED a tá zostane svietiť aj po uvoľnení. Ďalšie stlačenie ju zhasne.</p><div class="task-line"><strong>Úloha</strong><span>Ulož stav LED do premennej a pri stlačení ho zmeň.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Každé stlačenie zmení uložený stav raz.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 03 / ROZŠÍRENIE</span><h3>Prepínač režimu</h3><p>Jedno tlačidlo mení režim: LED bliká = otázka, LED svieti = odpoveď sa vyhodnocuje.</p><div class="task-line"><strong>Úloha</strong><span>Vytvor dva režimy a pre každý opíš, čo signalizuje.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Oba režimy majú jasný a odlišný signál.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 04 / ROZŠÍRENIE</span><h3>Semafor otázok</h3><p>Dve tlačidlá predstavujú „mám otázku“ a „rozumiem“. Každé rozsvieti svoju LED.</p><div class="task-line"><strong>Úloha</strong><span>Pripoj dva vstupy a dva výstupy; otestuj aj obe tlačidlá naraz.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Každá LED zodpovedá svojmu tlačidlu.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 05 / ROZŠÍRENIE</span><h3>Dve odpovede</h3><p>Tlačidlo A rozsvieti zelenú, tlačidlo B červenú LED. Tretí stav: pri oboch stlačených svietia obe.</p><div class="task-line"><strong>Úloha</strong><span>Navrhni logiku pre dve samostatné podmienky.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Otestuješ A, B, obe naraz aj žiadne.</span></div></article>
+        <article class="project-card teacher-card"><span class="project-number">PRE UČITEĽA / DIFERENCIÁCIA</span><h3>Podpora aj výzva</h3><p>Podpora: pripravená kostra kódu a pinová tabuľka. Základ: karta 1. Výzva: karta 4 alebo 5, premenná a zdôvodnenie výberu pinov.</p><div class="task-line"><strong>Formujúca spätná väzba</strong><span>„Ktorý pin číta? Ktorý pin riadi? Ako to vieš?“</span></div></article>
+      </div>
+    </section>
+
+    <section class="teacher-notes shell" data-teacher-only>
+      <p class="eyebrow">UČITEĽSKÉ POZNÁMKY · SKRYTÉ V POHĽADE ŽIAKA</p>
+      <h2>Metodické vedenie hodiny</h2>
+      <div class="teacher-notes-grid">
+        <article><h3>Pred začiatkom</h3><p>Pripravte pre každú dvojicu Arduino Uno, LED, tlačidlo, rezistor LED 220–330 Ω, pull-down rezistor 10 kΩ a prepojovacie vodiče. Skontrolujte spoločnú GND a dohodnite pravidlo: káble sa menia len pri odpojenej USB napájacej šnúre.</p></article>
+        <article><h3>Formujúce otázky</h3><p>Pred zapojením: „Ktorý pin bude počúvať? Ktorý bude riadiť? Aký stav očakávaš pred stlačením?“ Po zapojení: „Ktorý riadok načíta vstup a ktorý nastaví LED?“</p></article>
+        <article><h3>Diferenciácia a dôkaz učenia</h3><p>Podpora: tabuľka pin → režim → funkcia a čiastočne pripravená kostra kódu. Základ: Karta 01. Rozšírenie: prepínanie stavov alebo dve tlačidlá. Úspech: žiak predvedie obe polohy a vysvetlí INPUT, OUTPUT aj prúdový rezistor.</p></article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section compact-section">
+      <div class="section-heading"><div><p class="eyebrow">PRECVIČ SI PRED TESTOM</p><h2>Vieš priradiť funkciu?</h2></div><p class="section-note">Tento krátky interaktívny tréning dá okamžitú spätnú väzbu a vypočíta známku. Na klasifikovaný test použi učiteľov Google Form; ten uloží meno, triedu a odpovede do tabuľky.</p></div>
+      <p class="quiz-grade-guide">Bodovanie klasifikovaného testu: 5 správnych = 100 % (1) · 4 = 80 % (2) · 3 = 60 % (3) · 2 = 40 % (4) · 0–1 = 0–20 % (5).</p>
+      <div class="quiz-grid">
+        <article class="quiz-card" data-quiz="one"><span class="question-number">01 / A–D</span><h3>Kedy program Arduino vykoná obsah funkcie setup()?</h3><div class="answer-list"><button type="button" data-answer="correct">A · Raz po spustení alebo reštarte dosky</button><button type="button" data-answer="wrong">B · Opakovane počas celého behu programu</button><button type="button" data-answer="wrong">C · Iba po stlačení tlačidla</button><button type="button" data-answer="wrong">D · Až po ukončení loop()</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="two"><span class="question-number">02 / A–D</span><h3>Čo vráti funkcia digitalRead(2), ak je pin 2 pripojený na vysokú logickú úroveň?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · OUTPUT</button><button type="button" data-answer="wrong">B · Číslo 2</button><button type="button" data-answer="correct">C · HIGH</button><button type="button" data-answer="wrong">D · INPUT_PULLUP</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="three"><span class="question-number">03 / A–D</span><h3>V príkaze digitalWrite(8, HIGH) ktoré číslo označuje ovládaný pin?</h3><div class="answer-list"><button type="button" data-answer="correct">A · 8</button><button type="button" data-answer="wrong">B · HIGH</button><button type="button" data-answer="wrong">C · Číslo riadka v programe</button><button type="button" data-answer="wrong">D · Čas oneskorenia</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="four"><span class="question-number">04 / A–D</span><h3>Čo nastaví digitálny výstup D8 na logickú nulu?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · digitalRead(8)</button><button type="button" data-answer="wrong">B · pinMode(8, INPUT)</button><button type="button" data-answer="wrong">C · digitalWrite(8, HIGH)</button><button type="button" data-answer="correct">D · digitalWrite(8, LOW)</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="five"><span class="question-number">05 / A–D</span><h3>Tlačidlo s externým pull-down rezistorom je uvoľnené. Aký stav nastaví rezistor na vstupe?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · OUTPUT</button><button type="button" data-answer="wrong">B · Vstup zostane náhodný</button><button type="button" data-answer="wrong">C · HIGH, pretože pin je vstup</button><button type="button" data-answer="correct">D · LOW, pretože rezistor spája vstup s GND</button></div><p class="feedback" aria-live="polite"></p></article>
+      </div>
+      <section class="quiz-result" data-quiz-result hidden aria-live="polite"></section>
+      <p class="score-line" data-score aria-live="polite">Zatiaľ bez odpovedí · 0/5 správne</p>
+      <p class="quiz-form-note" data-teacher-only><strong>Google Forms:</strong> Na klasifikované hodnotenie použi formulár „Test 1.17“. Zaznamená meno, triedu a odpovede žiakov a automaticky vypočíta známku. <a href="google-formular.html">Otvoriť návod na nastavenie testov →</a></p>
+    </section>
+
+    <section class="lesson-sources shell">
+      <div><p class="eyebrow">PRIMÁRNE ZDROJE</p><h2>Dokumentácia Arduino</h2><p class="section-note">Oficiálna referencia funkcií použitých v programe.</p></div>
+      <div class="resource-links">
+        <a href="https://docs.arduino.cc/language-reference/en/functions/digital-io/pinMode/" target="_blank" rel="noopener noreferrer"><span>NASTAVENIE PINU</span><strong>pinMode() ↗</strong></a>
+        <a href="https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalread/" target="_blank" rel="noopener noreferrer"><span>ČÍTANIE VSTUPU</span><strong>digitalRead() ↗</strong></a>
+        <a href="https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalwrite/" target="_blank" rel="noopener noreferrer"><span>ZÁPIS VÝSTUPU</span><strong>digitalWrite() ↗</strong></a>
+      </div>
+    </section>
+
+    <section class="shell assessment-section"><div><p class="eyebrow">KRITÉRIÁ ÚSPECHU</p><h2>Na konci hodiny žiak…</h2></div><ul class="assessment-list"><li><span>01</span> správne nastaví digitálny vstup aj výstup pomocou <code>pinMode()</code>,</li><li><span>02</span> použije <code>digitalRead()</code> na vstup a <code>digitalWrite()</code> na výstup,</li><li><span>03</span> predvedie funkčné zapojenie LED s rezistorom a vysvetlí správanie tlačidla.</li></ul></section>
+    <nav class="lesson-nav shell" aria-label="Navigácia cvičení"><a href="index.html">← Prehľad</a><a class="next-link" href="cvicenie-2.html">Pokračovať: pull-up / pull-down →</a></nav>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Cvičenie 01 / 02 · 45 min</span><a href="domace-ulohy.html">Domáce úlohy <span aria-hidden="true">→</span></a></footer>
+</body>
+</html>

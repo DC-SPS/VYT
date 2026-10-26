@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="Návod pre učiteľa: vytvorte v Google účte dva päťotázkové Arduino testy s automatickým bodovaním a tabuľkou žiakov.">
+  <title>Google Forms · učiteľský návod | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="index.html"><span class="wordmark-icon">D·I/O</span><span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span></a><a class="header-link" href="index.html#osnova">← Prehľad kurzu</a></header>
+  <main>
+    <section class="lesson-hero shell">
+      <div><p class="eyebrow"><span class="live-dot"></span> GOOGLE FORMS · PRE UČITEĽA</p><h1>Odpovede aj<br><span>známky na jednom mieste.</span></h1><p class="hero-lead">Jeden spustiteľný skript vytvorí dva Google Form kvízy a súkromnú Google tabuľku. Žiak zadá meno a triedu, odpovie na päť otázok; učiteľ uvidí každú odpoveď, percentá a vypočítanú známku.</p><div class="hero-actions"><a class="button button-primary" href="#navod">Spustiť nastavenie <span aria-hidden="true">↓</span></a><span class="script-location">Lokálny súbor skriptu: <code>google-apps-script\Code.gs</code></span></div><div class="hero-meta"><span>2 samostatné testy</span><span>5 otázok × 20 bodov</span><span>bez zbierania e-mailu</span></div></div>
+      <aside class="outcome-card"><span class="outcome-icon">5×20</span><p class="eyebrow">VÝSLEDOK PRE UČITEĽA</p><h2>Meno, trieda, odpovede aj známka.</h2><p>Každý test má jednu správnu odpoveď v každej otázke. Google automaticky vyhodnotí body; ďalší hárok vypočíta presné percentá a známku.</p><div class="success-line"><span class="live-dot"></span> ODPOVEDE SA UKLADAJÚ DO TVOJEJ GOOGLE TABUĽKY</div></aside>
+    </section>
+
+    <section class="shell lesson-section" id="navod">
+      <div class="section-heading"><div><p class="eyebrow">JEDNORAZOVÉ NASTAVENIE V TVOJOM ÚČTE</p><h2>Tri kroky do hotového testu</h2></div><p class="section-note">Formuláre aj tabuľku vytvorí Google Apps Script priamo v tvojom Google účte. Žiadne heslá ani odpovede žiakov sa neposielajú na inú službu.</p></div>
+      <div class="timeline">
+        <article class="timeline-row"><span class="time">01<small>OTVORIŤ</small></span><div><span class="phase">NOVÝ PROJEKT</span><h3>Otvor script.google.com a vytvor nový projekt</h3><p>Prihlás sa do školského Google účtu, v ktorom máš vlastniť formuláre a odpovede. Vytvor nový projekt Apps Script.</p></div><a class="teacher-cue external-cue" href="https://script.google.com/home/start" target="_blank" rel="noopener noreferrer">OTVORIŤ APPS SCRIPT ↗</a></article>
+        <article class="timeline-row"><span class="time">02<small>VLOŽIŤ</small></span><div><span class="phase">PRIPRAVIŤ SKRIPT</span><h3>Vlož obsah lokálneho súboru Code.gs</h3><p>V editore zmaž ukážkovú funkciu. Vo svojom počítači otvor pripravený súbor <code>google-apps-script\Code.gs</code>, skopíruj celý jeho obsah do editoru a projekt ulož. Obsahuje správne odpovede — z bezpečnostných dôvodov ho neumiestňuj na verejnú webovú stránku ani do verejného GitHub repozitára.</p></div><span class="teacher-cue">SKRIPT ZOSTANE V TVOJOM ÚČTE</span></article>
+        <article class="timeline-row"><span class="time">03<small>SPUSTIŤ</small></span><div><span class="phase">VYTVORIŤ TESTY A TABUĽKU</span><h3>Vyber funkciu createDigitalIoTests a klikni na Spustiť</h3><p>Pri prvom spustení Google zobrazí žiadosť o povolenie na vytvorenie formulárov, tabuľky a spúšťača vyhodnotenia. Potvrď ju v školskom účte, skontroluj dokončenie a otvor odkaz na tabuľku v denníku vykonania.</p></div><span class="teacher-cue">FORMULÁRE VZNIKNÚ V TVOJOM ÚČTE</span></article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">ROZDELENIE V TABUĽKE</p><h2>Ktorý odkaz komu poslať?</h2></div></div>
+      <div class="compare-grid">
+        <article class="panel"><span class="phase">HÁROK „ODKAZY PRE ŽIAKOV“</span><h3>Odkaz pre žiakov</h3><p class="resource-description">Zdieľaj iba študentský odkaz príslušného testu v EduPage alebo triede. V oboch formulároch sú povinné polia Meno a priezvisko a Trieda; zbieranie e-mailov je vypnuté.</p></article>
+        <article class="panel teacher-card"><span class="phase">HÁROK „HODNOTENIE“</span><h3>Výsledky nechaj súkromné</h3><p class="resource-description">Učiteľský hárok obsahuje dátum, test, meno, triedu, body, percentá, známku a odpoveď na každú otázku. Tabuľku nezdieľaj so žiakmi — študentom pošli iba formulár na vyplnenie.</p></article>
+      </div>
+      <article class="panel marking-panel"><div><span class="phase">JEDNOTNÉ HODNOTENIE · MAXIMUM 100 BODOV</span><h3>Hranice podľa zadania</h3></div><div class="marking-table"><span>90–100 %</span><strong>známka 1</strong><span>75–89 %</span><strong>známka 2</strong><span>50–74 %</span><strong>známka 3</strong><span>30–49 %</span><strong>známka 4</strong><span>Menej ako 30 %</span><strong>známka 5</strong></div><p class="fine-print">Pri piatich rovnako bodovaných otázkach: 5 správnych = 100 % / 1; 4 = 80 % / 2; 3 = 60 % / 3; 2 = 40 % / 4; 0–1 = 0–20 % / 5. Hranice 90, 75, 50 a 30 % sa vo vzorci vyhodnocujú vrátane dolnej hranice.</p></article>
+    </section>
+
+    <section class="shell assessment-section"><div><p class="eyebrow">SÚKROMIE A KONTROLA</p><h2>Ty rozhoduješ, kto vidí výsledky.</h2></div><ul class="assessment-list"><li><span>01</span> Formuláre žiadajú iba meno a triedu; školský e-mail sa nezbiera.</li><li><span>02</span> Vzniknutú tabuľku vlastní tvoj Google účet. Žiaci dostávajú iba odkaz na odovzdanie.</li><li><span>03</span> Každá otázka má štyri možnosti, práve jednu správnu odpoveď a hodnotu 20 bodov.</li><li><span>04</span> Znovuspustenie funkcie použije už vytvorené formuláre a tabuľku — nevytvára ďalšie kópie.</li><li><span>05</span> Apps Script so správnymi odpoveďami ostáva lokálny a je automaticky vylúčený z Git commitu.</li></ul></section>
+
+    <nav class="lesson-nav shell" aria-label="Späť do kurzu"><a href="cvicenie-1.html">← Cvičenie 1.17</a><a class="next-link" href="cvicenie-2.html">Cvičenie 1.18 →</a></nav>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Google Forms · Apps Script · súkromné hodnotenie</span><a href="index.html#osnova">Späť na kurz <span aria-hidden="true">→</span></a></footer>
+</body>
+</html>
